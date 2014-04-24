@@ -1,0 +1,6 @@
+/*
+!_vimrc
+!/vimfiles
+/vimfiles/autoload/pathogen.vim
+/vimfiles/bundle/*
+!.gitignore

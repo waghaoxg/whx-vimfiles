@@ -1,0 +1,4 @@
+texCustom.vmb: call delete('D:\Program Files\Vim\vimfiles/after/ftplugin/tex_mycustom.vim')
+cmakeCustom.vmb: call delete('D:\Program Files\Vim\vimfiles/ftplugin/cmake_mycustom.vim')
+vmbFtDetect.vmb: call delete('D:\Program Files\Vim\vimfiles/ftdetect/vmb.vim')
+whxSessionSave.vmb: call delete('D:\Program Files\Vim\vimfiles/autoload/whx/autoMKSession.vim')
