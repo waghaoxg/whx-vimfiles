@@ -1,4 +1,5 @@
 "---------------------- general----------------------
+" for python
 set nocompatible
 if has("win32")
 	source $VIMRUNTIME/vimrc_example.vim
@@ -7,10 +8,16 @@ if has("win32")
 "	nmap <silent> <c-Enter> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
     set guifont=consolas:h11
 elseif has("unix")
-    set guifont=Droid\ Sans\ Mono\ 10
+    "set guifont=Droid\ Sans\ Mono\ 10
+    set guifont=Monaco:h14
     "set guifont=DejaVu\ Sans\ Mono\ 11
 	syntax on
 	set showcmd
+"elseif has("macunix")
+"    set guifont=Droid\ Sans\ Mono\ 30
+"    "set guifont=DejaVu\ Sans\ Mono\ 11
+"	syntax on
+"	set showcmd
 endif
 filetype plugin on
 set ignorecase
@@ -19,10 +26,11 @@ set nu
 colorscheme molokai
 set tabstop=4
 set shiftwidth=4
+set expandtab
 let mapleader = ","
 set backupdir=$HOME/vimbackupfiles//,.,
 set hlsearch
-set wildmode=full
+set wildmode=longest:full
 set wildmenu
 set fileencodings=utf-8,cp936,ucs-bom
 set wildignorecase
@@ -62,10 +70,10 @@ set guioptions-=e
 "imap <A-j> <ESC>gja
 "imap <A-k> <ESC>gka
 "imap <A-l> <ESC>la
-imap <C-h> <ESC>bi
-imap <C-l> <ESC>lwi
-imap <C-b> <ESC><S-i>
-imap <C-e> <ESC><S-a>
+"imap <C-h> <ESC>bi
+"imap <C-l> <ESC>lwi
+"imap <C-b> <ESC><S-i>
+"imap <C-e> <ESC><S-a>
 "--------------Key mapping------------------
 if has("unix")
 	map  <C-Insert> "+y 
@@ -161,6 +169,10 @@ endif
 	let g:ycm_filetype_specific_completion_to_disable = {
 			\ 'text' : 1,
 			\}
+	let g:ycm_seed_identifiers_with_syntax = 1  "for keyword
+"	let g:ycm_path_to_python_interpreter='/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python'
+  let g:ycm_key_invoke_completion = '<C-k>'
+  let g:ycm_always_populate_location_list = 1
 "endif
 
 "---------------------sticky notes-------------------------
@@ -217,6 +229,14 @@ let wiki_3.path = 'e:\Codes\intrinsic_image\nonlocal_texture_constraints\notes_w
 let g:vimwiki_list = [{},wiki_2,wiki_3]
 
 elseif has("unix")
+
+let wiki_1 = {}
+let wiki_1.path = '/Users/wanghaoxing/vimwiki/vimwiki'
+
+let wiki_2 = {}
+let wiki_2.path = '/Users/wanghaoxing/vimwiki/vimwiki1'
+
+let g:vimwiki_list = [wiki_1,wiki_2]
 endif
 
 "--------------------- xclip -------------------------
@@ -233,6 +253,11 @@ elseif has("unix")
 endif
 "---------------------------Taglist------------------------
 let Tlist_Use_Right_Window = 1
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+let Tlist_Show_One_File = 1
+let Tlist_GainFocus_On_ToggleOpen= 1
+nmap <leader>t :TlistOpen<cr>
+nmap <leader>T :TlistClose<cr>
 
 "---------------------------closing------------------------
 inoremap {}      {}<++><Left><Left><Left><Left><Left>
@@ -241,6 +266,9 @@ inoremap ()      ()<++><Left><Left><Left><Left><Left>
 inoremap <>      <><++><Left><Left><Left><Left><Left>
 inoremap ''      ''<++><Left><Left><Left><Left><Left>
 inoremap ""      ""<++><Left><Left><Left><Left><Left>
+
+
+imap <C-j> <ESC>/<++><cr>4s<ESC>:noh<ESC>a
 
 "---------------------------only for first time------------------------
 " if has("win32")
@@ -260,3 +288,55 @@ inoremap ""      ""<++><Left><Left><Left><Left><Left>
 " 	endif
 " 	let g:Tex_ViewRule_pdf = '"d:\Program Files\SumatraPDF\SumatraPDF.exe" -reuse-instance -inverse-search "d:\Program Files\Vim\vim73\gvim.exe -c \":RemoteOpen +\%l \%f\""'
 " endif
+"
+map Y "*y$
+map YY 3GwY<C-o>
+
+"----------------- for fuzzy search----------
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+map // <Plug>(incsearch-fuzzy-/)
+"map z? <Plug>(incsearch-fuzzy-?)
+map g// <Plug>(incsearch-fuzzy-stay)
+
+"----------------- for easy motion----------
+"map // <Plug>(easymotion-sn)
+map f/ <Plug>(easymotion-s2)
+"map /1 <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+
+"----------------- vim-asterisk----------
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+"map g*  <Plug>(asterisk-g*)
+"map g#  <Plug>(asterisk-g#)
+"map z*  <Plug>(asterisk-z*)
+"map gz* <Plug>(asterisk-gz*)
+"map z#  <Plug>(asterisk-z#)
+"map gz# <Plug>(asterisk-gz#)
+
+"-------asyrun--------------------
+let g:asyncrun_bell=1 
+
+"--------for rainbow-------
+let g:rainbow_active = 0
+
+"--------autoformat----
+let g:formatters_cpp = ['astyle_cpp']
+let g:formatters_c = ['astyle_cpp']
+
+"--------ultisnip--------
+"" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+"--------for command -------
+map <F6> :!astyle %<cr>
